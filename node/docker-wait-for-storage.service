@@ -1,0 +1,18 @@
+[Unit]
+Description=Waiting for SAN to start up before starting Docker Swarm
+After=network-online.target
+Wants=network-online.target
+Before=docker.service
+WantedBy=docker.service
+RequiredBy=docker.service
+
+[Service]
+Type=oneshot
+User=nobody
+Environment=STORAGE_HEARTBEAT_URL=http://10.0.100.1:2222
+ExecStart=/usr/local/bin/docker-wait-for-storage
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=docker.service
+RequiredBy=docker.service

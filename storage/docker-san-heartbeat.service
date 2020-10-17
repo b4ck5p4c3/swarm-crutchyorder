@@ -1,0 +1,14 @@
+[Unit]
+Description=Announcing heartbeat status
+Wants=nfs-server.service
+After=nfs-server.service
+
+[Service]
+Type=simple
+Restart=always
+User=nobody
+Environment=BIND_PORT=2222
+ExecStart=/usr/local/bin/docker-san-heartbeat
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Check if STORAGE_HEARTBEAT_URL is set, return 1 otherwise
+[ -z "$STORAGE_HEARTBEAT_URL" ] \
+  && echo "Environment variable STORAGE_HEARTBEAT_URL is not set" \
+  && exit 1
+
+# Pinging with cURL until success
+while true; do
+
+  curl $STORAGE_HEARTBEAT_URL 2>/dev/null >/dev/null && break
+  sleep 0.5
+
+done
+exit 0

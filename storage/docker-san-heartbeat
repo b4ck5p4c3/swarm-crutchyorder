@@ -1,0 +1,9 @@
+#!/bin/bash
+# Pretty stupidly, isn't it? 
+
+# Generate an empty temporary folder
+TEMP_DIR=(`mktemp -d`)
+
+# Serve it using Python3 built-in http.server
+echo "Serving $TEMP_DIR"
+python3 -m http.server -d $TEMP_DIR $BIND_PORT
